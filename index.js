@@ -15,8 +15,11 @@ exports.handler = async (event, context, callback) => {
 
   // resize image
   const resizedImage = await sharp(originalImage.Body)
-    .resize(200)
-    .jpeg({ mozjpeg: true })
+    .resize({
+      width: 200,
+      height: 200,
+      fit: sharp.fit.cover,
+    })
     .toBuffer();
 
   // upload image
